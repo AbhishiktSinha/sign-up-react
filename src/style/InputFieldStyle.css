@@ -1,0 +1,33 @@
+div.input-field-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0;    
+
+    /* min-height: 50px; */
+    width: 100%;
+}
+
+.input-label {
+    font-size: 13px;
+    color: black;
+}
+input {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: 2px solid gray !important;
+    border-radius: 8px !important;
+
+    margin-bottom: 6px;
+}
+input[class*=" invalid-"] {
+    border: 2px solid red !important;
+}
+input[class*=" valid-"] {
+    border: 2px solid green !important;
+}
+.error-field {
+    font-size: 12px;
+    color: red;
+    margin: 0;    
+}
