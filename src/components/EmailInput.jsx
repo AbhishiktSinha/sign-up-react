@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { validateEmailInput } from "../validation-functions";
 import InputFieldContainer from "./InputFieldContainer";
 
@@ -10,14 +10,22 @@ export default function EmailInput({formStatus, submitValidationHandler}) {
     const [error, setError] = useState('');
 
     if (formStatus === 'SUBMITTING') {
-        submitValidationHandler( (error.length == 0) && (inputValue !== '') )
+        const emailCumulativeError = inputValue ? error : 'Email can not be empty';
+        submitValidationHandler(emailCumulativeError)
     }
 
-    // if (formStatus === 'SUCCESS') {
-    //     setInputValue('');
-    //     setError('');
-        
-    // }
+    useEffect(()=>{
+        if (formStatus === 'SUCCESS') {
+            resetInitialState();
+        }
+    }, [formStatus])
+
+    
+    function resetInitialState() {
+        setInputValue('');
+        setError('');
+        inputInfoClass='';
+    }
 
     function handleInputChange(e) {        
         

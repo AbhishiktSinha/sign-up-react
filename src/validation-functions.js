@@ -51,6 +51,7 @@ export function validatePassword(value, setError) {
 export function matchPasswords(value1, value2, setError) {
     
     if (value1 === value2) {
+        
         setError('');
         return true;
     }

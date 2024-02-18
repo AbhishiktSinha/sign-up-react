@@ -1,3 +1,9 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 div.input-field-container {
     display: flex;
     flex-direction: column;
@@ -10,15 +16,18 @@ div.input-field-container {
 .input-label {
     font-size: 13px;
     color: black;
+    margin-bottom: 2px;
 }
 input {
     width: 100%;
     background: transparent;
     outline: none;
-    border: 2px solid gray !important;
-    border-radius: 8px !important;
 
-    margin-bottom: 6px;
+    padding: 4px;
+    
+    border: 2px solid gray !important;
+    border-radius: 12px !important;  
+    margin-bottom: 4px;
 }
 input[class*=" invalid-"] {
     border: 2px solid red !important;
@@ -27,6 +36,7 @@ input[class*=" valid-"] {
     border: 2px solid green !important;
 }
 .error-field {
+    min-height: 12px;
     font-size: 12px;
     color: red;
     margin: 0;    

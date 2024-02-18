@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validatePassword, matchPasswords } from "../validation-functions";
 import InputFieldContainer from "./InputFieldContainer";
+import '../style/PasswordInput.css'
 
 let passwordInfoClass = '';
 let confPasswordInfoClass = '';
@@ -14,11 +15,18 @@ export default function PasswordInput({formStatus, submitValidationHandler}) {
     const[confPasswordError, setConfPasswordError] = useState('');
 
     if (formStatus === 'SUBMITTING') {
-        
-        submitValidationHandler(
-            ( (passwordError.length == 0) && (password !== '') ) && 
-            ( (confPasswordError.length == 0) && (confPassword != '')) )
+    const passwordCumulativeError = (password.length == 0 ? 'Password can not be empty' : passwordError)
+    const confPasswordCumulativeError = (confPassword ? confPasswordError : 'Please confirm the password');
+        submitValidationHandler((
+            passwordCumulativeError || confPasswordCumulativeError
+        ))
     }
+    
+    useEffect(()=>{
+        if (formStatus === 'SUCCESS') {
+            resetInitialState();
+        }
+    }, [formStatus])
    
 
     function handlePasswordChange(e) {
@@ -46,11 +54,14 @@ export default function PasswordInput({formStatus, submitValidationHandler}) {
         confPasswordInfoClass = matchPasswords(password, value, setConfPasswordError) ? 'valid-confPassword' : 'invalid-confPassword';
     }
 
-    function restoreDefaultState() {
+    function resetInitialState() {
         setPassword('')
         setConfPassword('')
         setPasswordError('')
         setConfPasswordError('');
+
+        passwordInfoClass = '';
+        confPasswordInfoClass = '';
     }
 
     return (

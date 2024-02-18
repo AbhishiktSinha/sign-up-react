@@ -14,11 +14,11 @@ export default function InputFieldContainer({infoClass, inputType, inputValue, c
                 onChange={(e) => changeHandler(e)}
             />
 
-            {
-                error && (
-                    <div className="error-field">{error}</div>
-                )
-            }
+            <div 
+                className="error-field"
+                style={{visibility: (error ? 'visible' : 'hidden')}}
+            >{error}</div>
+            
         </div>
     )
 }
